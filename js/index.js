@@ -1,7 +1,7 @@
 var csg = require('csg');
 var { Viewer } = require('./viewer');
 
-var cylinder = CSG.cylinder({ slices: 8, start: new CSG.Vector(-1, 0, 0), end: new CSG.Vector(1, 0, 0) });
+var cylinder = CSG.cylinder({ slices: 20, start: new CSG.Vector(0, 0, 0), end: new CSG.Vector(0, 1, 0) });
 
 // Viewer.lineOverlay = false;
 
