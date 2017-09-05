@@ -42,5 +42,6 @@ var operations = [
 Viewer.lineOverlay = true;
 
 for (var i = 0; i < operations.length; i++) {
-  addViewer(new Viewer(operations[i], 250, 250, 5));
+  var viewer = new Viewer(operations[i], 250, 250, 5);
+  document.body.appendChild(viewer.gl.canvas);
 }

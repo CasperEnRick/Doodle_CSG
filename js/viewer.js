@@ -137,4 +137,4 @@ function addViewer(viewer) {
   document.getElementById("1").appendChild(viewer.gl.canvas);
 }
 
-module.exports = { Viewer, addViewer };
+module.exports = { Viewer };
