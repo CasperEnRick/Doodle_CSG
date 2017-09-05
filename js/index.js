@@ -7,7 +7,7 @@ var state = new State();
 var canvas = document.createElement('canvas');
 canvas.width = 720;
 canvas.height = 480;
-document.getElementById('2d').appendChild(canvas);
+document.getElementById('d2').appendChild(canvas);
 var context = canvas.getContext('2d');
 
 state.addListener(function(state) {
@@ -41,4 +41,4 @@ var cylinder = CSG.cylinder({ slices: 20, start: new CSG.Vector(0, 0, 0), end: n
 // Viewer.lineOverlay = false;
 
 var viewer = new Viewer(cylinder, 720, 480, 10);
-document.getElementById('3d').appendChild(viewer.gl.canvas);
+document.getElementById('d3').appendChild(viewer.gl.canvas);
