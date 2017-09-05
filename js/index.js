@@ -2,11 +2,14 @@ var csg = require('csg');
 var { Viewer } = require('./viewer');
 var State = require('./state');
 
+var WIDTH = 720;
+var HEIGHT = 480;
+
 var state = new State();
 
 var canvas = document.createElement('canvas');
-canvas.width = 720;
-canvas.height = 480;
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
 document.getElementById('d2').appendChild(canvas);
 var context = canvas.getContext('2d');
 
@@ -16,7 +19,7 @@ state.addListener(function(state) {
   for (let i = 0; i < state.cylinders.length; i ++) {
     var cylinder = state.cylinders[i];
     context.beginPath();
-    context.arc(cylinder.x, cylinder.y, 10, 0, Math.PI * 2, false);
+    context.arc(cylinder.x, cylinder.y, cylinder.radius, 0, Math.PI * 2, false);
     context.fill();
   }
 });
@@ -27,7 +30,9 @@ canvas.onmousemove = function(mouse) {
     state.update(function(state) {
       state.cylinders.push({
         x: mouse.x,
-        y: mouse.y
+        y: mouse.y,
+        radius: 10,
+        height: 4
       })
 
       return state;
@@ -36,9 +41,30 @@ canvas.onmousemove = function(mouse) {
 }
 
 
-var cylinder = CSG.cylinder({ slices: 20, start: new CSG.Vector(0, 0, 0), end: new CSG.Vector(0, 1, 0) });
-
-// Viewer.lineOverlay = false;
-
-var viewer = new Viewer(cylinder, 720, 480, 10);
+var viewer = new Viewer(new CSG(), WIDTH, HEIGHT, 80);
 document.getElementById('d3').appendChild(viewer.gl.canvas);
+
+state.addListener(function(state) {
+  var csg = new CSG();
+
+  var halfWidth = WIDTH / 2;
+  var halfHeight = HEIGHT / 2;
+
+  for (let i = 0; i < state.cylinders.length; i ++) {
+    var cylinderData = state.cylinders[i];
+    var x = cylinderData.x - halfWidth;
+    var y = cylinderData.height;
+    var z = cylinderData.y - halfHeight;
+    var cylinderCSG = CSG.cylinder({
+      slices: 20,
+      start: new CSG.Vector(x, 0, z),
+      end: new CSG.Vector(x, y, z),
+      radius: cylinderData.radius
+    });
+
+    csg = csg.union(cylinderCSG);
+  }
+
+  viewer.mesh = csg.toMesh();
+  viewer.gl.ondraw();
+});
