@@ -61,7 +61,7 @@ canvas.onmousemove = function(mouse) {
 }
 
 
-var viewer = new Viewer(new CSG(), WIDTH, HEIGHT, 80);
+var viewer = new Viewer(new CSG(), WIDTH, HEIGHT, 500);
 document.getElementById('d3').appendChild(viewer.gl.canvas);
 
 state.addListener(function(state) {
