@@ -1,7 +1,5 @@
-function State() {
-  this._state = {
-    cylinders: []
-  };
+function State(state) {
+  this._state = state || {};
   this._listeners = [];
 }
 State.prototype.addListener = function(listener) {
