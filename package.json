@@ -1,0 +1,15 @@
+{
+  "name": "csg-doodle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csg": "^1.0.1",
+    "webpack": "^3.5.5"
+  }
+}
