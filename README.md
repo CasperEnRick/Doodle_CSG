@@ -2,6 +2,7 @@
 # Install and run
 ```
 npm install
-webpack ./js/index.js bundle.js --watch &
-serve
+npm start
 ```
+
+Go to http://localhost:5000/
