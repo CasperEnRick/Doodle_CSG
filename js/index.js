@@ -2,10 +2,11 @@ var csg = require('csg');
 var { Viewer } = require('./viewer');
 var State = require('./state');
 
+
 var WIDTH = 720;
 var HEIGHT = 480;
 
-var state = new State({
+var state = window.state = new State({
   cylinders: [],
   eraseCylinders: []
 });
@@ -38,19 +39,21 @@ state.addListener(function(state) {
 
 
 canvas.onmousemove = function(mouse) {
+  var offsetTop = document.getElementById('d2').offsetTop;
+
   if (mouse.which & 1) {
     state.update(function(state) {
       if (mouse.shiftKey) {
         state.eraseCylinders.push({
           x: mouse.x,
-          y: mouse.y,
+          y: mouse.y - offsetTop,
           radius: 20,
           height: 10
         });
       } else {
         state.cylinders.push({
           x: mouse.x,
-          y: mouse.y,
+          y: mouse.y - offsetTop,
           radius: 20,
           height: 20
         });
