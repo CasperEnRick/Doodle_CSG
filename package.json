@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "serve && webpack ./js/index.js bundle.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
